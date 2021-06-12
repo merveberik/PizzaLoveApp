@@ -10,7 +10,7 @@ using PizzaLoveApp.DataAccess.Concrete.EfCore;
 namespace PizzaLoveApp.DataAccess.Migrations
 {
     [DbContext(typeof(PizzaLoveAppContext))]
-    [Migration("20210612220604_CreateDatabase")]
+    [Migration("20210612225139_CreateDatabase")]
     partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
