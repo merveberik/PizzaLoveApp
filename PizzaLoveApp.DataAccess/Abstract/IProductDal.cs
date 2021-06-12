@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace PizzaLoveApp.DataAccess.Abstract
 {
-    public interface ISpecialPizzaDal : IRepository<SpecialPizza>
+    public interface IProductDal:IRepository<Product>
     {
+        Product GetProductDetails(int id);
+        List<Product> GetProductsByCategories(string category);
     }
 }

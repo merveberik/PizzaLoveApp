@@ -23,8 +23,8 @@ namespace PizzaLoveApp.DataAccess.Concrete.EfCore
                 .HasKey(c => new { c.CategoryId, c.ProductId });
         }
 
-        public DbSet<Product> products { get; set; }
-        public DbSet<Category> categories{ get; set; }
-        public DbSet<Order> orders{ get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories{ get; set; }
+        public DbSet<Order> Orders{ get; set; }
     }
 }

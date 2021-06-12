@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PizzaLoveApp.DataAccess.Concrete.EfCore
 {
-    public class EfCoreCategoryDal : EfCoreGenericRepository<Category, PizzaLoveAppContext>, ICategoryDal
+    public class EfCorePizzaDal : EfCoreGenericRepository<Pizza,PizzaLoveAppContext>, IPizzaDal
     {
     }
 }
