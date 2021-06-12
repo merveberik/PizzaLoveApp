@@ -12,9 +12,9 @@ namespace PizzaLoveApp.DataAccess.Concrete.EfCore
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=PizzaLoveApp;Trusted_Connection=true;");
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=PizzaLoveApp;Trusted_Connection=true;");
             // Create local DB
-            optionsBuilder.UseSqlServer(@"Server=localhost;Database=PizzaLoveApp;integrated security = true");
+            //optionsBuilder.UseSqlServer(@"Server=localhost;Database=PizzaLoveApp;integrated security = true");
         }
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
