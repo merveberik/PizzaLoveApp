@@ -51,20 +51,20 @@ namespace PizzaLoveApp.DataAccess.Concrete.EfCore
             new Product(){ Name="Kahve",Price=8,ImageUrl="12.jpg",Description="sade türk kahvesi"},
         };
 
-        //private static ProductCategory[] ProductCategory =
-        //{
-        //    new ProductCategory(){Product=Products[0],Category=Categories[0]},
-        //    new ProductCategory(){Product=Products[1],Category=Categories[0]},
-        //    new ProductCategory(){Product=Products[2],Category=Categories[0]},
-        //    new ProductCategory(){Product=Products[3],Category=Categories[1]},
-        //    new ProductCategory(){Product=Products[4],Category=Categories[1]},
-        //    new ProductCategory(){Product=Products[5],Category=Categories[1]},
-        //    new ProductCategory(){Product=Products[6],Category=Categories[2]},
-        //    new ProductCategory(){Product=Products[7],Category=Categories[2]},
-        //    new ProductCategory(){Product=Products[8],Category=Categories[2]},
-        //    new ProductCategory(){Product=Products[9],Category=Categories[3]},
-        //    new ProductCategory(){Product=Products[10],Category=Categories[3]},
-        //    new ProductCategory(){Product=Products[11],Category=Categories[3]},
-        //};
+        private static ProductCategory[] ProductCategory =
+        {
+            new ProductCategory(){Product=Products[0],Category=Categories[0]},
+            new ProductCategory(){Product=Products[1],Category=Categories[0]},
+            new ProductCategory(){Product=Products[2],Category=Categories[0]},
+            new ProductCategory(){Product=Products[3],Category=Categories[1]},
+            new ProductCategory(){Product=Products[4],Category=Categories[1]},
+            new ProductCategory(){Product=Products[5],Category=Categories[1]},
+            new ProductCategory(){Product=Products[6],Category=Categories[2]},
+            new ProductCategory(){Product=Products[7],Category=Categories[2]},
+            new ProductCategory(){Product=Products[8],Category=Categories[2]},
+            new ProductCategory(){Product=Products[9],Category=Categories[3]},
+            new ProductCategory(){Product=Products[10],Category=Categories[3]},
+            new ProductCategory(){Product=Products[11],Category=Categories[3]},
+        };
     }
 }
