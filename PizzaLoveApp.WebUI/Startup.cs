@@ -52,7 +52,6 @@ namespace PizzaLoveApp.WebUI
             }
 
             app.UseHttpsRedirection();
-            //app.UseStaticFiles();
 
             app.UseRouting();
 
