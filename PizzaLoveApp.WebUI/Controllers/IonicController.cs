@@ -21,11 +21,11 @@ namespace PizzaLoveApp.WebUI.Controllers
             _productService = productService;
         }
 
-        [HttpGet]
-        public string Get()
-        {
-            return "merhaba";
-        }
+        //[HttpGet]
+        //public string Get()
+        //{
+        //    return "merhaba";
+        //}
 
         [HttpGet("getall")]
         public List<Product> GetAll()
