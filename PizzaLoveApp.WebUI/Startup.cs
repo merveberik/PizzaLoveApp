@@ -10,6 +10,7 @@ using PizzaLoveApp.Business.Abstract;
 using PizzaLoveApp.Business.Concrete;
 using PizzaLoveApp.DataAccess.Abstract;
 using PizzaLoveApp.DataAccess.Concrete.EfCore;
+using PizzaLoveApp.WebUI.Middlewares;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,7 +59,7 @@ namespace PizzaLoveApp.WebUI
             app.UseAuthorization();
 
             app.UseStaticFiles();
-
+            app.CustomStaticFiles();
 
             //app.UseEndpoints(endpoints =>
             //{

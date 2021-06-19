@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PizzaLoveApp.WebUI.ViewComponents
 {
-    public class CategoryListViewComponent
+    public class CategoryListViewComponent : ViewComponent
     {
         private ICategoryService _categoryService;
 
@@ -17,12 +17,12 @@ namespace PizzaLoveApp.WebUI.ViewComponents
             _categoryService = categoryService;
         }
 
-        //public IViewComponentResult Invoke()
-        //{
-        //    return View(new CategoryListViewModel()
-        //    {
-        //        SelectedCateogry = RouteData
-        //    });
-        //}
+        public IViewComponentResult Invoke()
+        {
+            return View(new CategoryListViewModel()
+            {
+                Categories = _categoryService.GetAll()
+            });
+        }
     }
 }

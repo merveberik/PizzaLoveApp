@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /PizzaLoveApp.DataAccess/Migrations/20210613071658_CreateDatabase.cs
 /PizzaLoveApp.DataAccess/Migrations/20210613071658_CreateDatabase.Designer.cs
+/PizzaLoveApp.WebUI/wwwroot
