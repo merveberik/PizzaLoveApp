@@ -59,6 +59,7 @@ namespace PizzaLoveApp.WebUI
             app.UseAuthorization();
 
             app.UseStaticFiles();
+
             app.CustomStaticFiles();
 
             //app.UseEndpoints(endpoints =>
