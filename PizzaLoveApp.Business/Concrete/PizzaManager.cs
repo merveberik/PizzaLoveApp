@@ -28,7 +28,7 @@ namespace PizzaLoveApp.Business.Concrete
             _pizzaDal.Delete(entitiy);
         }
 
-        public List<Pizza> Getall()
+        public List<Pizza> GetAll()
         {
             return _pizzaDal.GetAll();
         }

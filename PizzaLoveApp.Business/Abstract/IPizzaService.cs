@@ -9,7 +9,7 @@ namespace PizzaLoveApp.Business.Abstract
 {
     public interface IPizzaService
     {
-        List<Pizza> Getall();
+        List<Pizza> GetAll();
         Pizza GetById(int id);
         void Create(Pizza entitiy);
         void Update(Pizza entitiy);
