@@ -26,7 +26,7 @@ namespace PizzaLoveApp.DataAccess.Concrete.EfCore
                 }
                 if (context.SpecialPizzas.Count() == 0)
                 {
-                    context.SpecialPizzas.AddRange();
+                    context.SpecialPizzas.AddRange(SpecialPizzas);
                 }
                 context.SaveChanges();
             }
