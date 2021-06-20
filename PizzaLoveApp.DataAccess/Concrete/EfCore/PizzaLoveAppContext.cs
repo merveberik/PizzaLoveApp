@@ -20,12 +20,13 @@ namespace PizzaLoveApp.DataAccess.Concrete.EfCore
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
             modelbuilder.Entity<ProductCategory>()
-                .HasKey(c => new { c.CategoryId, c.ProductId , c.PizzaSizeId});
+                .HasKey(c => new { c.CategoryId, c.ProductId});
         }
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories{ get; set; }
         public DbSet<Order> Orders{ get; set; }
-        public DbSet<SpecialPizza> SpecialPizzas { get; set; }
+        public DbSet<PizzaSize> PizzaSizes { get; set; }
+        //public DbSet<SpecialPizza> SpecialPizzas { get; set; }
     }
 }

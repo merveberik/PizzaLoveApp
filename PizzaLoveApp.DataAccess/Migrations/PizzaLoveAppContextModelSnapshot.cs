@@ -60,7 +60,7 @@ namespace PizzaLoveApp.DataAccess.Migrations
 
             modelBuilder.Entity("PizzaLoveApp.Entities.PizzaSize", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("PizzaSizeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -68,12 +68,17 @@ namespace PizzaLoveApp.DataAccess.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Size")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("PizzaSizeId");
 
-                    b.ToTable("PizzaSize");
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("PizzaSizes");
                 });
 
             modelBuilder.Entity("PizzaLoveApp.Entities.Product", b =>
@@ -95,6 +100,9 @@ namespace PizzaLoveApp.DataAccess.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("Size")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Products");
@@ -108,40 +116,22 @@ namespace PizzaLoveApp.DataAccess.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PizzaSizeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CategoryId", "ProductId", "PizzaSizeId");
-
-                    b.HasIndex("PizzaSizeId");
+                    b.HasKey("CategoryId", "ProductId");
 
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductCategory");
                 });
 
-            modelBuilder.Entity("PizzaLoveApp.Entities.SpecialPizza", b =>
+            modelBuilder.Entity("PizzaLoveApp.Entities.PizzaSize", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.HasOne("PizzaLoveApp.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SpecialPizzas");
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("PizzaLoveApp.Entities.ProductCategory", b =>
@@ -149,12 +139,6 @@ namespace PizzaLoveApp.DataAccess.Migrations
                     b.HasOne("PizzaLoveApp.Entities.Category", "Category")
                         .WithMany("ProductCategories")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PizzaLoveApp.Entities.PizzaSize", "PizzaSize")
-                        .WithMany("ProductCategories")
-                        .HasForeignKey("PizzaSizeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -166,17 +150,10 @@ namespace PizzaLoveApp.DataAccess.Migrations
 
                     b.Navigation("Category");
 
-                    b.Navigation("PizzaSize");
-
                     b.Navigation("Product");
                 });
 
             modelBuilder.Entity("PizzaLoveApp.Entities.Category", b =>
-                {
-                    b.Navigation("ProductCategories");
-                });
-
-            modelBuilder.Entity("PizzaLoveApp.Entities.PizzaSize", b =>
                 {
                     b.Navigation("ProductCategories");
                 });

@@ -23,11 +23,16 @@ namespace PizzaLoveApp.DataAccess.Concrete.EfCore
                 if (context.Products.Count() == 0)
                 {
                     context.Products.AddRange(Products);
+                    context.AddRange(ProductCategory);
                 }
-                if (context.SpecialPizzas.Count() == 0)
+                if (context.PizzaSizes.Count() == 0)
                 {
-                    context.SpecialPizzas.AddRange(SpecialPizzas);
+                    context.PizzaSizes.AddRange(PizzaSizes);
                 }
+                //if (context.SpecialPizzas.Count() == 0)
+                //{
+                //    context.SpecialPizzas.AddRange(SpecialPizzas);
+                //}
                 context.SaveChanges();
             }
         }
@@ -71,10 +76,17 @@ namespace PizzaLoveApp.DataAccess.Concrete.EfCore
             new ProductCategory(){Product=Products[11],Category=Categories[3]},
         };
 
-        private static SpecialPizza[] SpecialPizzas =
+        private static PizzaSize[] PizzaSizes =
         {
-            new SpecialPizza(){Name="Tonbalıklı pizza",Price=30,ImageUrl="13.jpg",Description="Akdenizden çıkartılan özenle hazırlanmış tonbalıkları ile süslenmiş pizza"},
-            new SpecialPizza(){Name="Kapya biberli pizza",Price=22,ImageUrl="14.jpg",Description="Mevsime özel kırmızı ve yeşil kapya biberli pizza"}
+            new PizzaSize(){Size="Küçük",Price=0,Product=Products[0]},
+            new PizzaSize(){Size="Orta",Price=10,Product=Products[0]},
+            new PizzaSize(){Size="Büyük",Price=20,Product=Products[0]},
         };
+
+        //private static SpecialPizza[] SpecialPizzas =
+        //{
+        //    new SpecialPizza(){Name="Tonbalıklı pizza",Price=30,ImageUrl="13.jpg",Description="Akdenizden çıkartılan özenle hazırlanmış tonbalıkları ile süslenmiş pizza"},
+        //    new SpecialPizza(){Name="Kapya biberli pizza",Price=22,ImageUrl="14.jpg",Description="Mevsime özel kırmızı ve yeşil kapya biberli pizza"}
+        //};
     }
 }
