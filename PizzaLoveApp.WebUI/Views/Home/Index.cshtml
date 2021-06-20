@@ -2,12 +2,12 @@
 
 <partial name="_slider" />
 <div class="row">
-    <div class="col-md-12">
+    @*<div class="col-md-12">*@
         @foreach (var item in Model.Products)
         {
-            <p>@item.Name</p>
+            <partial name="_product" for="@item" />
         }
-    </div>
+    @*</div>*@
 </div>
 
 
