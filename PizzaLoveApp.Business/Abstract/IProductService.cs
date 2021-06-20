@@ -13,8 +13,8 @@ namespace PizzaLoveApp.Business.Abstract
         Product GetProductDetails(int id);
         List<Product> GetAll();
         List<Product> GetProductsByCategories(string category);
-        void Create(Product entitiy);
-        void Update(Product entitiy);
-        void Delete(Product entitiy);
+        void Create(Product entity);
+        void Update(Product entity);
+        void Delete(Product entity);
     }
 }

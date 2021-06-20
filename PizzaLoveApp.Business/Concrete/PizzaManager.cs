@@ -18,14 +18,14 @@ namespace PizzaLoveApp.Business.Concrete
             _pizzaDal = pizzaDal;
         }
 
-        public void Create(Pizza entitiy)
+        public void Create(Pizza entity)
         {
-            _pizzaDal.Create(entitiy);
+            _pizzaDal.Create(entity);
         }
 
-        public void Delete(Pizza entitiy)
+        public void Delete(Pizza entity)
         {
-            _pizzaDal.Delete(entitiy);
+            _pizzaDal.Delete(entity);
         }
 
         public List<Pizza> GetAll()
@@ -38,9 +38,9 @@ namespace PizzaLoveApp.Business.Concrete
             return _pizzaDal.GetById(id);
         }
 
-        public void Update(Pizza entitiy)
+        public void Update(Pizza entity)
         {
-            _pizzaDal.Update(entitiy);
+            _pizzaDal.Update(entity);
         }
     }
 }

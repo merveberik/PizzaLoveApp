@@ -11,8 +11,8 @@ namespace PizzaLoveApp.Business.Abstract
     {
         List<Pizza> GetAll();
         Pizza GetById(int id);
-        void Create(Pizza entitiy);
-        void Update(Pizza entitiy);
-        void Delete(Pizza entitiy);
+        void Create(Pizza entity);
+        void Update(Pizza entity);
+        void Delete(Pizza entity);
     }
 }

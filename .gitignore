@@ -368,3 +368,4 @@ FodyWeavers.xsd
 /PizzaLoveApp.DataAccess/Migrations/20210620104917_CreateDatabase.Designer.cs
 /PizzaLoveApp.DataAccess/Migrations/20210620120109_CreateDatabase.cs
 /PizzaLoveApp.DataAccess/Migrations/20210620120109_CreateDatabase.Designer.cs
+/PizzaLoveApp.DataAccess/Migrations

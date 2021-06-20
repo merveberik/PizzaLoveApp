@@ -18,14 +18,14 @@ namespace PizzaLoveApp.Business.Concrete
             _productDal = productDal;
         }
 
-        public void Create(Product entitiy)
+        public void Create(Product entity)
         {
-            _productDal.Create(entitiy);
+            _productDal.Create(entity);
         }
 
-        public void Delete(Product entitiy)
+        public void Delete(Product entity)
         {
-            _productDal.Delete(entitiy);
+            _productDal.Delete(entity);
         }
 
         public List<Product> GetAll()
@@ -48,9 +48,9 @@ namespace PizzaLoveApp.Business.Concrete
             return _productDal.GetProductsByCategories(category);
         }
 
-        public void Update(Product entitiy)
+        public void Update(Product entity)
         {
-            _productDal.Update(entitiy);
+            _productDal.Update(entity);
         }
     }
 }
