@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaLoveApp.Entites", "PizzaLoveApp.Entity\PizzaLoveApp.Entites.csproj", "{311C1496-D624-46B8-A8C4-D132D538B53C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaLoveApp.Entities", "PizzaLoveApp.Entity\PizzaLoveApp.Entities.csproj", "{311C1496-D624-46B8-A8C4-D132D538B53C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaLoveApp.DataAccess", "PizzaLoveApp.DataAccess\PizzaLoveApp.DataAccess.csproj", "{47F0D704-E58C-47A1-9249-C89736C429B0}"
 EndProject

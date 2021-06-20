@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PizzaLoveApp.DataAccess\PizzaLoveApp.DataAccess.csproj" />
-    <ProjectReference Include="..\PizzaLoveApp.Entity\PizzaLoveApp.Entites.csproj" />
+    <ProjectReference Include="..\PizzaLoveApp.Entity\PizzaLoveApp.Entities.csproj" />
   </ItemGroup>
 
 </Project>

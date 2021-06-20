@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PizzaLoveApp.Entity\PizzaLoveApp.Entites.csproj" />
+    <ProjectReference Include="..\PizzaLoveApp.Entity\PizzaLoveApp.Entities.csproj" />
   </ItemGroup>
 
 </Project>

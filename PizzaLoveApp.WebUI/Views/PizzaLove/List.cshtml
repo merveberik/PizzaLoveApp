@@ -1,4 +1,12 @@
-﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model ProductListModel
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            @foreach (Product item in Model.Products)
+            {
+                <partial name="_product" for="@item" />
+            }
+        </div>
+    </div>
+</div>

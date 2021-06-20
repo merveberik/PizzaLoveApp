@@ -72,10 +72,10 @@ namespace PizzaLoveApp.WebUI
                 //endpoints.MapRazorPages();
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}");
 
-                //endpoints.MapControllerRoute(
-                //   name: "products",
-                //   pattern: "products/{category?}",
-                //   defaults: new { controller = "Shop", action = "List" });
+                endpoints.MapControllerRoute(
+                   name: "products",
+                   pattern: "products/{category?}",
+                   defaults: new { controller = "PizzaLove", action = "List" });
             });
         }
     }

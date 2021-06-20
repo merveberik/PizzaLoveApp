@@ -14,5 +14,8 @@ namespace PizzaLoveApp.Entities
         public int ProductId { get; set; }
         public Product Product { get; set; }
 
+        public int PizzaSizeId { get; set; }
+        public PizzaSize PizzaSize{ get; set; }
+
     }
 }
