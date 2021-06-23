@@ -35,6 +35,8 @@ namespace PizzaLoveApp.WebUI
 
             services.AddScoped<IProductDal, EfCoreProductDal>();
             services.AddScoped<IProductService, ProductManager>();
+            services.AddScoped<ICategoryDal, EfCoreCategoryDal>();
+            services.AddScoped<ICategoryService, CategoryManager>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
         }

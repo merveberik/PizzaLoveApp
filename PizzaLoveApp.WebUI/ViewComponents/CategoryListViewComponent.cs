@@ -21,7 +21,7 @@ namespace PizzaLoveApp.WebUI.ViewComponents
         {
             return View(new CategoryListViewModel()
             {
-                //SelectedCateogry = RouteData.Values["category"]?.ToString(),
+                SelectedCategory = RouteData.Values["category"]?.ToString(),
                 Categories = _categoryService.GetAll()
             });
         }

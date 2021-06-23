@@ -8,7 +8,7 @@ namespace PizzaLoveApp.WebUI.Models
 {
     public class CategoryListViewModel
     {
-        public string SelectedCateogry { get; set; }
+        public string SelectedCategory { get; set; }
         public List<Category> Categories { get; set; }
     }
 }
