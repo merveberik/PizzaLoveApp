@@ -9,6 +9,7 @@ namespace PizzaLoveApp.Business.Abstract
 {
     public interface ICategoryService
     {
+        Category GetById(int id);
         List<Category> GetAll();
 
         void Create(Category entity);
