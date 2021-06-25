@@ -6,8 +6,11 @@
         <a asp-controller="PizzaLove"
            asp-action="List"
            asp-route-category="@item.Name.ToLower()"
-           class="list-group-item list-group-item-action @(Model.SelectedCategory == item.Name.ToLower()?"active":"")">
-            <img src="img/2.jpg " style="width: 45px" />
+           class="list-group-item list-group-item-action @(Model.SelectedCategory == item.Name.ToLower() ? "active" : "")">
+            @if (@item.ImageUrl != null)
+            {
+                <img src="img/icons/@item.ImageUrl" style="width: 45px" />
+            }
             @item.Name
         </a>
     }
