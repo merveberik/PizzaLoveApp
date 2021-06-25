@@ -79,6 +79,16 @@ namespace PizzaLoveApp.WebUI
                    name: "products",
                    pattern: "products/{category?}",
                    defaults: new { controller = "PizzaLove", action = "List" });
+
+                endpoints.MapControllerRoute(
+                    name: "adminProducts",
+                    pattern: "admin/products",
+                    defaults: new { controller = "Admin", action = "Index" });
+
+                endpoints.MapControllerRoute(
+                    name: "adminProducts",
+                    pattern: "admin/products/{id?}",
+                    defaults: new { controller = "Admin", action = "EditProduct" });
             });
         }
     }

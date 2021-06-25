@@ -20,7 +20,10 @@ namespace PizzaLoveApp.WebUI.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(new ProductListModel()
+            {
+                Products = _productService.GetAll()
+            });
         }
 
         [HttpGet]
@@ -43,7 +46,52 @@ namespace PizzaLoveApp.WebUI.Controllers
 
             _productService.Create(entity);
 
-            return View();
+            return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult EditProduct(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var entity = _productService.GetById((int)id);
+
+            if (entity == null)
+            {
+                return NotFound();
+            }
+            var model = new ProductModel()
+            {
+                Id = entity.Id,
+                Name = entity.Name,
+                Price = entity.Price,
+                Description = entity.Description,
+                ImageUrl = entity.ImageUrl,
+                Size = entity.Size
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult EditProduct(ProductModel product)
+        {
+            var entity = _productService.GetById(product.Id);
+            if(entity == null)
+            {
+                return NotFound();
+            }
+            entity.Name = product.Name;
+            entity.Description = product.Description;
+            entity.Price = product.Price;
+            entity.ImageUrl = product.ImageUrl;
+            entity.Size = product.Size;
+
+            _productService.Update(entity);
+
+            return RedirectToAction("Index");
+        }
+
     }
 }

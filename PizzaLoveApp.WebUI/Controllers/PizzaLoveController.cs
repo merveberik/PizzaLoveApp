@@ -23,7 +23,7 @@ namespace PizzaLoveApp.WebUI.Controllers
         {
             return View();
         }
-
+        [Route("products/{category?}")]
         public IActionResult List(string category)
         {
             return View(new ProductListModel()
