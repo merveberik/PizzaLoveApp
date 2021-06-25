@@ -20,7 +20,7 @@ namespace PizzaLoveApp.WebUI.Controllers
             _categoryService = categoryService;
         }
 
-        public IActionResult Index()
+        public IActionResult ProductList()
         {
             return View(new ProductListModel()
             {
