@@ -58,29 +58,6 @@ namespace PizzaLoveApp.DataAccess.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("PizzaLoveApp.Entities.PizzaSize", b =>
-                {
-                    b.Property<int>("PizzaSizeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Size")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PizzaSizeId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("PizzaSizes");
-                });
-
             modelBuilder.Entity("PizzaLoveApp.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -100,9 +77,6 @@ namespace PizzaLoveApp.DataAccess.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("Size")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("Products");
@@ -121,17 +95,6 @@ namespace PizzaLoveApp.DataAccess.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductCategory");
-                });
-
-            modelBuilder.Entity("PizzaLoveApp.Entities.PizzaSize", b =>
-                {
-                    b.HasOne("PizzaLoveApp.Entities.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("PizzaLoveApp.Entities.ProductCategory", b =>

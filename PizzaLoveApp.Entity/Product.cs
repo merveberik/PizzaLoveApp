@@ -13,10 +13,6 @@ namespace PizzaLoveApp.Entities
         public string ImageUrl { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
-        public int Size { get; set; }
-
-        //public int PizzaSizeId { get; set; }
-        //public PizzaSize PizzaSize { get; set; }
 
         public List<ProductCategory> ProductCategories { get; set; }
     }

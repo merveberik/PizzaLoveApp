@@ -30,9 +30,6 @@ namespace PizzaLoveApp.WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            //services.AddControllers();
-
             services.AddScoped<IProductDal, EfCoreProductDal>();
             services.AddScoped<IProductService, ProductManager>();
 
@@ -65,14 +62,9 @@ namespace PizzaLoveApp.WebUI
 
             app.CustomStaticFiles();
 
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllers();
-            //});
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapRazorPages();
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}");
 
                 endpoints.MapControllerRoute(

@@ -9,5 +9,6 @@ namespace PizzaLoveApp.DataAccess.Abstract
 {
     public interface ICategoryDal : IRepository<Category>
     {
+        Category GetByIdWithProducts(int categoryId);
     }
 }

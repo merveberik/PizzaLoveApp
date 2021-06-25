@@ -25,14 +25,6 @@ namespace PizzaLoveApp.DataAccess.Concrete.EfCore
                     context.Products.AddRange(Products);
                     context.AddRange(ProductCategory);
                 }
-                if (context.PizzaSizes.Count() == 0)
-                {
-                    context.PizzaSizes.AddRange(PizzaSizes);
-                }
-                //if (context.SpecialPizzas.Count() == 0)
-                //{
-                //    context.SpecialPizzas.AddRange(SpecialPizzas);
-                //}
                 context.SaveChanges();
             }
         }
@@ -108,13 +100,6 @@ namespace PizzaLoveApp.DataAccess.Concrete.EfCore
             new ProductCategory(){Product=Products[22],Category=Categories[10]},
             new ProductCategory(){Product=Products[23],Category=Categories[11]},
             new ProductCategory(){Product=Products[24],Category=Categories[11]},
-        };
-
-        private static PizzaSize[] PizzaSizes =
-        {
-            new PizzaSize(){Size="Küçük",Price=0,Product=Products[0]},
-            new PizzaSize(){Size="Orta",Price=10,Product=Products[0]},
-            new PizzaSize(){Size="Büyük",Price=20,Product=Products[0]},
         };
 
         //private static SpecialPizza[] SpecialPizzas =

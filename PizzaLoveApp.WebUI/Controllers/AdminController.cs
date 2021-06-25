@@ -12,10 +12,12 @@ namespace PizzaLoveApp.WebUI.Controllers
     public class AdminController : Controller
     {
         private IProductService _productService;
+        private ICategoryService _categoryService;
 
-        public AdminController(IProductService productService)
+        public AdminController(IProductService productService, ICategoryService categoryService)
         {
             _productService = productService;
+            _categoryService = categoryService;
         }
 
         public IActionResult Index()
@@ -41,7 +43,6 @@ namespace PizzaLoveApp.WebUI.Controllers
                 ImageUrl = product.ImageUrl,
                 Price = product.Price,
                 Description = product.Description,
-                Size = product.Size
             };
 
             _productService.Create(entity);
@@ -69,7 +70,6 @@ namespace PizzaLoveApp.WebUI.Controllers
                 Price = entity.Price,
                 Description = entity.Description,
                 ImageUrl = entity.ImageUrl,
-                Size = entity.Size
             };
             return View(model);
         }
@@ -78,7 +78,7 @@ namespace PizzaLoveApp.WebUI.Controllers
         public IActionResult EditProduct(ProductModel product)
         {
             var entity = _productService.GetById(product.Id);
-            if(entity == null)
+            if (entity == null)
             {
                 return NotFound();
             }
@@ -86,7 +86,6 @@ namespace PizzaLoveApp.WebUI.Controllers
             entity.Description = product.Description;
             entity.Price = product.Price;
             entity.ImageUrl = product.ImageUrl;
-            entity.Size = product.Size;
 
             _productService.Update(entity);
 
@@ -101,6 +100,69 @@ namespace PizzaLoveApp.WebUI.Controllers
                 _productService.Delete(entity);
             }
             return RedirectToAction("Index");
+        }
+
+        public IActionResult CategoryList()
+        {
+            return View(new CategoryListModel()
+            {
+                Categories = _categoryService.GetAll()
+            });
+        }
+
+        [HttpGet]
+        public IActionResult CreateCategory()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateCategory(CategoryModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var entity = new Category()
+                {
+                    Name = model.Name
+                };
+
+                _categoryService.Create(entity);
+
+                return RedirectToAction("CategoryList");
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult EditCategory(int categoryId)
+        {
+            var entity = _categoryService.GetByIdWithProducts(categoryId);
+
+            if (entity != null)
+            {
+                return View(new CategoryModel()
+                {
+                    Id = entity.Id,
+                    Name = entity.Name,
+                    Products = entity.ProductCategories.Select(p => p.Product).ToList()
+                });
+            }
+
+            return NotFound();
+        }
+
+        [HttpPost]
+        public IActionResult EditCategory(CategoryModel model)
+        {
+            var entity = _categoryService.GetById(model.Id);
+
+            if (entity == null)
+                return NotFound();
+
+            entity.Name = model.Name;
+            _categoryService.Update(entity);
+            return RedirectToAction("CategoryList");
         }
     }
 }

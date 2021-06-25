@@ -28,6 +28,11 @@ namespace PizzaLoveApp.Business.Concrete
             _categoryDal.Delete(entity);
         }
 
+        public Category GetByIdWithProducts(int categoryId)
+        {
+            return _categoryDal.GetByIdWithProducts(categoryId);
+        }
+
         public Category GetById(int id)
         {
             return _categoryDal.GetById(id);

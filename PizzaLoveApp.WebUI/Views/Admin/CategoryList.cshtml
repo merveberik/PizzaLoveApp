@@ -1,0 +1,41 @@
+﻿@model CategoryListModel
+
+@{
+    ViewData["Title"] = "CategoryList";
+}
+
+<h1>CategoryList</h1>
+<hr />
+@if (Model.Categories.Count > 0)
+{
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th style="width: 30px"></th>
+                <th style="width: 100px">Name</th>
+                <th style="width: 150px"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Categories)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditCategory", new { categoryId = item.Id },
+                            new { @class = "btn btn-primary btn-sm mr-2" })
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-warning">
+        <h4>Kategori Bulunamadı</h4>
+    </div>
+}
