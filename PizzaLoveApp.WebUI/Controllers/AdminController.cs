@@ -60,7 +60,7 @@ namespace PizzaLoveApp.WebUI.Controllers
 
             if (entity == null)
             {
-                return NotFound(); 
+                return NotFound();
             }
             var model = new ProductModel()
             {
@@ -92,6 +92,15 @@ namespace PizzaLoveApp.WebUI.Controllers
 
             return RedirectToAction("Index");
         }
-
+        [HttpPost]
+        public IActionResult DeleteProduct(int productId)
+        {
+            var entity = _productService.GetById(productId);
+            if (entity != null)
+            {
+                _productService.Delete(entity);
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
