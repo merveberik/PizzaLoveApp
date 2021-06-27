@@ -164,5 +164,15 @@ namespace PizzaLoveApp.WebUI.Controllers
             _categoryService.Update(entity);
             return RedirectToAction("CategoryList");
         }
+        [HttpPost]
+        public IActionResult DeleteCategory(int categoryId)
+        {
+            var entity = _categoryService.GetById(categoryId);
+            if(entity != null)
+            {
+                _categoryService.Delete(entity);
+            }
+            return RedirectToAction("CategoryList");
+        }
     }
 }
