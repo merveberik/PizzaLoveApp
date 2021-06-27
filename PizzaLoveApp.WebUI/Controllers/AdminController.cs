@@ -31,6 +31,7 @@ namespace PizzaLoveApp.WebUI.Controllers
         [HttpGet]
         public IActionResult CreateProduct()
         {
+            ViewBag.Categories = _categoryService.GetAll();
             return View(new ProductModel());
         }
 
@@ -47,7 +48,7 @@ namespace PizzaLoveApp.WebUI.Controllers
 
             _productService.Create(entity);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("ProductList");
         }
 
         [HttpGet]
@@ -57,7 +58,7 @@ namespace PizzaLoveApp.WebUI.Controllers
             {
                 return NotFound();
             }
-            var entity = _productService.GetById((int)id);
+            var entity = _productService.GetByIdWithCategories((int)id);
 
             if (entity == null)
             {
@@ -70,7 +71,10 @@ namespace PizzaLoveApp.WebUI.Controllers
                 Price = entity.Price,
                 Description = entity.Description,
                 ImageUrl = entity.ImageUrl,
+                SelectedCategories = entity.ProductCategories.Select(i =>i.Category).ToList()
             };
+
+            ViewBag.Categories = _categoryService.GetAll();
             return View(model);
         }
 
@@ -89,7 +93,7 @@ namespace PizzaLoveApp.WebUI.Controllers
 
             _productService.Update(entity);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("ProductList");
         }
         [HttpPost]
         public IActionResult DeleteProduct(int productId)
@@ -99,7 +103,7 @@ namespace PizzaLoveApp.WebUI.Controllers
             {
                 _productService.Delete(entity);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("CategoryList");
         }
 
         public IActionResult CategoryList()
@@ -168,10 +172,16 @@ namespace PizzaLoveApp.WebUI.Controllers
         public IActionResult DeleteCategory(int categoryId)
         {
             var entity = _categoryService.GetById(categoryId);
-            if(entity != null)
+            if (entity != null)
             {
                 _categoryService.Delete(entity);
             }
+            return RedirectToAction("CategoryList");
+        }
+
+        public IActionResult DeleteFromCategory(int categoryId, int productId)
+        {
+            _categoryService.DeleteFromCategory(categoryId, productId);
             return RedirectToAction("CategoryList");
         }
     }

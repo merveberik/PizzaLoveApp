@@ -22,5 +22,14 @@ namespace PizzaLoveApp.DataAccess.Concrete.EfCore
                     .FirstOrDefault();
             }
         }
+
+        public void DeleteFromCategory(int categoryId, int productId)
+        {
+            using (var context = new PizzaLoveAppContext())
+            {
+                var cmd = @"delete from ProductCategory where ProductId=@p0 and CategoryId=@p1";
+                context.Database.ExecuteSqlRaw(cmd, productId, categoryId);
+            }
+        }
     }
 }

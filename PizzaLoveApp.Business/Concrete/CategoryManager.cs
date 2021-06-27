@@ -33,6 +33,11 @@ namespace PizzaLoveApp.Business.Concrete
             return _categoryDal.GetByIdWithProducts(categoryId);
         }
 
+        public void DeleteFromCategory(int categoryId, int productId)
+        {
+            _categoryDal.DeleteFromCategory(categoryId, productId);
+        }
+
         public Category GetById(int id)
         {
             return _categoryDal.GetById(id);

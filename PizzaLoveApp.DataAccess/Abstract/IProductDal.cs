@@ -11,5 +11,6 @@ namespace PizzaLoveApp.DataAccess.Abstract
     {
         Product GetProductDetails(int id);
         List<Product> GetProductsByCategories(string category);
+        Product GetByIdWithCategories(int id);
     }
 }

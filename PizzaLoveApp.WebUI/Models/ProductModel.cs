@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PizzaLoveApp.Entities;
 
 namespace PizzaLoveApp.WebUI.Models
 {
@@ -13,5 +14,7 @@ namespace PizzaLoveApp.WebUI.Models
         public string Description { get; set; }
         public decimal Price { get; set; }
         public int Size { get; set; }
+
+        public List<Category> SelectedCategories = new List<Category>();
     }
 }

@@ -16,5 +16,6 @@ namespace PizzaLoveApp.Business.Abstract
         void Create(Product entity);
         void Update(Product entity);
         void Delete(Product entity);
+        Product GetByIdWithCategories(int id);
     }
 }
