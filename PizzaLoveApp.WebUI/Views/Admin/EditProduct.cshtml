@@ -5,7 +5,7 @@
 
 <h1>Ürünü Düzenle</h1>
 <hr />
-<form asp-controller="Admin" asp-action="EditProduct" method="post">
+<form asp-controller="Admin" asp-action="EditProduct" method="post" enctype="multipart/form-data">
     <div class="row">
         <div class="col-md-8">
             <input type="hidden" name="Id" value="@Model.Id" />
@@ -18,7 +18,9 @@
             <div class="form-group-row">
                 <label asp-for="ImageUrl" class="col-md-2 col-form-label">Resim Adresi</label>
                 <div class="col-md-10">
-                    <input asp-for="ImageUrl" value="@Model.ImageUrl" class="form-control" />
+                    <input type="hidden"  name="ImageUrl" value="@Model.ImageUrl"/>
+                    <img src="~/img/@Model.ImageUrl" width="80"/>
+                    <input type="file" name="file" value="" />
                 </div>
             </div>
             <div class="form-group-row">

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using PizzaLoveApp.Business.Abstract;
 using PizzaLoveApp.Entities;
 using PizzaLoveApp.WebUI.Models;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace PizzaLoveApp.WebUI.Controllers
 {
@@ -76,7 +78,7 @@ namespace PizzaLoveApp.WebUI.Controllers
                 Price = entity.Price,
                 Description = entity.Description,
                 ImageUrl = entity.ImageUrl,
-                SelectedCategories = entity.ProductCategories.Select(i =>i.Category).ToList()
+                SelectedCategories = entity.ProductCategories.Select(i => i.Category).ToList()
             };
 
             ViewBag.Categories = _categoryService.GetAll();
@@ -84,21 +86,37 @@ namespace PizzaLoveApp.WebUI.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditProduct(ProductModel product, int[] categoryIds)
+        public async Task<IActionResult> EditProduct(ProductModel product, int[] categoryIds, IFormFile file)
         {
-            var entity = _productService.GetById(product.Id);
-            if (entity == null)
+            if (ModelState.IsValid)
             {
-                return NotFound();
+                var entity = _productService.GetById(product.Id);
+                if (entity == null)
+                {
+                    return NotFound();
+                }
+                entity.Name = product.Name;
+                entity.Description = product.Description;
+                entity.Price = product.Price;
+
+                if (file != null)
+                {
+                    entity.ImageUrl = file.FileName;
+
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\img", file.FileName);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+                }
+
+                _productService.Update(entity, categoryIds);
+
+                return RedirectToAction("ProductList");
             }
-            entity.Name = product.Name;
-            entity.Description = product.Description;
-            entity.Price = product.Price;
-            entity.ImageUrl = product.ImageUrl;
 
-            _productService.Update(entity,categoryIds);
-
-            return RedirectToAction("ProductList");
+            ViewBag.Categories = _categoryService.GetAll();
+            return View(product);
         }
         [HttpPost]
         public IActionResult DeleteProduct(int productId)
