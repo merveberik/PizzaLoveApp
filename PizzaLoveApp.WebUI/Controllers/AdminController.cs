@@ -38,17 +38,22 @@ namespace PizzaLoveApp.WebUI.Controllers
         [HttpPost]
         public IActionResult CreateProduct(ProductModel product)
         {
-            var entity = new Product()
+            if (ModelState.IsValid)
             {
-                Name = product.Name,
-                ImageUrl = product.ImageUrl,
-                Price = product.Price,
-                Description = product.Description,
-            };
+                var entity = new Product()
+                {
+                    Name = product.Name,
+                    ImageUrl = product.ImageUrl,
+                    Price = product.Price,
+                    Description = product.Description,
+                };
 
-            _productService.Create(entity);
+                _productService.Create(entity);
 
-            return RedirectToAction("ProductList");
+                return RedirectToAction("ProductList");
+            }
+
+            return View(product);
         }
 
         [HttpGet]
@@ -103,7 +108,7 @@ namespace PizzaLoveApp.WebUI.Controllers
             {
                 _productService.Delete(entity);
             }
-            return RedirectToAction("CategoryList");
+            return RedirectToAction("ProductList");
         }
 
         public IActionResult CategoryList()
