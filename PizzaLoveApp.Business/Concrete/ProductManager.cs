@@ -33,6 +33,11 @@ namespace PizzaLoveApp.Business.Concrete
             return _productDal.GetByIdWithCategories(id);
         }
 
+        public void Update(Product entity, int[] categoryIds)
+        {
+            _productDal.Update(entity,categoryIds);
+        }
+
         public List<Product> GetAll()
         {
             return _productDal.GetAll();

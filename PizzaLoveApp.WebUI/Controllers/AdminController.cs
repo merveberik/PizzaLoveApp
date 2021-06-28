@@ -79,7 +79,7 @@ namespace PizzaLoveApp.WebUI.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditProduct(ProductModel product)
+        public IActionResult EditProduct(ProductModel product, int[] categoryIds)
         {
             var entity = _productService.GetById(product.Id);
             if (entity == null)
@@ -91,7 +91,7 @@ namespace PizzaLoveApp.WebUI.Controllers
             entity.Price = product.Price;
             entity.ImageUrl = product.ImageUrl;
 
-            _productService.Update(entity);
+            _productService.Update(entity,categoryIds);
 
             return RedirectToAction("ProductList");
         }
