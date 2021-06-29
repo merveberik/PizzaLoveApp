@@ -62,5 +62,10 @@ namespace PizzaLoveApp.Business.Concrete
         {
             _productDal.Update(entity);
         }
+
+        public void Create(Product entity, int[] categoryIds)
+        {
+            _productDal.Create(entity, categoryIds);
+        }
     }
 }

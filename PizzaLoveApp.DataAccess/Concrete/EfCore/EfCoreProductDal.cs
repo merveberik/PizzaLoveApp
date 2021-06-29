@@ -77,5 +77,29 @@ namespace PizzaLoveApp.DataAccess.Concrete.EfCore
 
             }
         }
+
+        public void Create(Product entity, int[] categoryIds)
+        {
+            using (var context = new PizzaLoveAppContext())
+            {
+                if (entity != null)
+                {
+                    Product product = new Product();
+                    product.Name = entity.Name;
+                    product.Price = entity.Price;
+                    product.ImageUrl = entity.ImageUrl;
+                    product.Description = entity.Description;
+                    product.ProductCategories = categoryIds.Select(catId => new ProductCategory()
+                    {
+                        CategoryId = catId,
+                        ProductId = product.Id
+                    }).ToList();
+
+                    context.Products.Add(product);
+                    context.SaveChanges();
+                }
+
+            }
+        }
     }
 }

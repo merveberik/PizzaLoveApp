@@ -38,8 +38,9 @@ namespace PizzaLoveApp.WebUI.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateProduct(ProductModel product)
+        public async Task<IActionResult> CreateProduct(ProductModel product, int[] categoryIds, IFormFile file)
         {
+            ModelState.Remove("ImageUrl");
             if (ModelState.IsValid)
             {
                 var entity = new Product()
@@ -49,9 +50,17 @@ namespace PizzaLoveApp.WebUI.Controllers
                     Price = product.Price,
                     Description = product.Description,
                 };
+                if (file != null)
+                {
+                    entity.ImageUrl = file.FileName;
 
-                _productService.Create(entity);
-
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\img", file.FileName);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+                }
+                _productService.Create(entity, categoryIds);
                 return RedirectToAction("ProductList");
             }
 

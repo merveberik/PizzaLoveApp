@@ -13,5 +13,6 @@ namespace PizzaLoveApp.DataAccess.Abstract
         List<Product> GetProductsByCategories(string category);
         Product GetByIdWithCategories(int id);
         void Update(Product entity, int[] categoryIds);
+        void Create(Product entity, int[] categoryIds);
     }
 }
