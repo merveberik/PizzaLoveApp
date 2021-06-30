@@ -4,9 +4,20 @@
     var counter = 0;
 }
 
+@section Scripts{
+    <script src="~/modules/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"></script>
+    <script src="~/modules/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace("editor");
+    </script>
+
+}
+
 <h1>Ürünü Düzenle</h1>
 <hr />
 <form asp-controller="Admin" asp-action="EditProduct" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="All" class="text-danger"></div>
     <div class="row">
         <div class="col-md-8">
             <input type="hidden" name="Id" value="@Model.Id" />

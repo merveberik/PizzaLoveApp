@@ -97,9 +97,10 @@ namespace PizzaLoveApp.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> EditProduct(ProductModel product, int[] categoryIds, IFormFile file)
         {
+            var entity = new Product();
             if (ModelState.IsValid)
             {
-                var entity = _productService.GetById(product.Id);
+                entity = _productService.GetById(product.Id);
                 if (entity == null)
                 {
                     return NotFound();
@@ -123,7 +124,8 @@ namespace PizzaLoveApp.WebUI.Controllers
 
                 return RedirectToAction("ProductList");
             }
-
+            entity = _productService.GetByIdWithCategories((int)product.Id);
+            product.SelectedCategories = entity.ProductCategories.Select(i => i.Category).ToList();
             ViewBag.Categories = _categoryService.GetAll();
             return View(product);
         }

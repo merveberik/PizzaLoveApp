@@ -5,6 +5,15 @@
     var counter = 0;
 }
 
+@section Scripts{
+    <script src="~/modules/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"></script>
+    <script src="~/modules/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace("editor");
+    </script>
+
+}
 <h1>Ürün Ekle</h1>
 <hr />
 <form asp-controller="Admin" asp-action="CreateProduct" method="post" enctype="multipart/form-data">
