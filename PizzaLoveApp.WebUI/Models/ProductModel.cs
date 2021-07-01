@@ -19,7 +19,7 @@ namespace PizzaLoveApp.WebUI.Models
         [StringLength(100, MinimumLength = 10, ErrorMessage = "Ürün açıklaması minimum 10 karakter olmalıdır.")]
         public string Description { get; set; }
         [Required(ErrorMessage = "Fiyat Belirtiniz.")]
-        [Range(1, 1000)]
+        //[Range(1, 1000)]
         public decimal? Price { get; set; }
         public int Size { get; set; }
 
