@@ -8,9 +8,11 @@ using PizzaLoveApp.Entities;
 using PizzaLoveApp.WebUI.Models;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PizzaLoveApp.WebUI.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private IProductService _productService;
