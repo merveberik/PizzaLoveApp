@@ -101,17 +101,17 @@ namespace PizzaLoveApp.WebUI
             }
 
             app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
+            
             app.UseStaticFiles();
 
             app.CustomStaticFiles();
 
             app.UseAuthentication();
 
+            app.UseRouting();
+
+            app.UseAuthorization();
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}");

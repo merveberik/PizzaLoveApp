@@ -6,9 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PizzaLoveApp.WebUI.Extensions;
 
 namespace PizzaLoveApp.WebUI.Controllers
 {
+    [AutoValidateAntiforgeryToken]
     public class AccountController : Controller
     {
         private UserManager<ApplicationUser> _userManager;
@@ -50,36 +52,59 @@ namespace PizzaLoveApp.WebUI.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Login()
+        public async Task<IActionResult> Login(string ReturnUrl = null)
         {
-            return View(new LoginModel());
+            return View(new LoginModel()
+            {
+                ReturnUrl = ReturnUrl
+            });
         }
         [HttpPost]
-        public async Task<IActionResult> Login(RegisterModel model, string returnUrl = null)
+        public async Task<IActionResult> Login(LoginModel model)
         {
-            returnUrl = returnUrl ?? "~/";
 
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-            var user = await _userManager.FindByNameAsync(model.UserName);
+            var user = await _userManager.FindByEmailAsync(model.Email);
 
             if (user == null)
             {
-                ModelState.AddModelError("", "Bu kullanıcı ile daha önce hesap oluşturulmamıştır.");
+                ModelState.AddModelError("", "Bu email ile daha önce hesap oluşturulmamıştır.");
                 return View(model);
             }
-            var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, true, false);
-            //PasswordSignInAsync(username,password,tarayıcı kapatıldığında oturum hatırlansınmı,5 kere yanlış girince kitlensin mi)
+
+            if (!await _userManager.IsEmailConfirmedAsync(user))
+            {
+                ModelState.AddModelError("", "Lütfen hesabınızı gönderilen email ile aktifleştirniz.");
+                return View(model);
+            }
+
+            var result = await _signInManager.PasswordSignInAsync(user, model.Password, true, false);
 
             if (result.Succeeded)
             {
-                return Redirect(returnUrl);
+                return Redirect(model.ReturnUrl ?? "~/");
             }
-            ModelState.AddModelError("", "Kullanıcı adı veya Password hatalı.");
-            return View(model);
 
+            ModelState.AddModelError("", "Email veya şifre hatalı.");
+
+            return View(new LoginModel());
+
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            /*
+             * TODO: çıkış yapmıyor bakılacak ve mesaj göstermiyor
+             */
+            await _signInManager.SignOutAsync();
+
+            TempData.Put("message", new ResultMessage()
+            {
+                Title = "Oturum Kapatıldı",
+                Message = "Hesabınız güvenli bir şekilde sonlandırıldı.",
+                Css = "warning"
+            });
+
+            return Redirect("~/");
         }
     }
 }

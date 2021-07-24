@@ -21,7 +21,7 @@ namespace PizzaLoveApp.WebUI.Models
         [Required]
         [DataType(DataType.Password)]
         [Compare("Password")]
-        public string RePassword { get; set; }
+        public string RePassword { get; set; }  
 
         [Required]
         [DataType(DataType.EmailAddress)]

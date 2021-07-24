@@ -1,52 +1,63 @@
 ﻿<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <em class="navbar-brand" href="#" style="color: black; font-size: 45px; margin: 20px 180px 0px 120px;">Pizza<span style="color:red; font-size:50px;">Love</span></em>
+    <div class="container">
+        @*TODO Logo kontrol edilecek link çalışmıyor görünümü bozuyor*@
+        <em class="navbar-brand" href="/home/index" style="color: black; font-size: 45px;">Pizza<span style="color: red; font-size: 50px;">Love</span></em>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+        <div class="col-md-9">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/Home/Index">Ana Sayfa</a>
+                    <a asp-controller="Home" asp-action="Index" class="nav-link active" aria-current="page">Ana Sayfa</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Kampanyalar</a>
                 </li>
-                <!--<li class="nav-item">-->
-                @*<a class="nav-link" href="#">Pizzalar</a>*@
-                @*<a asp-controller="PizzaLove" asp-action="List" class="nav-link">Pizzalar</a>*@
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin/products">Admin Ürünler</a>
-                </li>
-                <li class="nav-item">
-                    <a asp-controller="Admin" asp-action="CreateProduct" class="nav-link">Ürün Ekle</a>
-                </li>
-                <li class="nav-item">
-                    <a asp-controller="Admin" asp-action="CategoryList" class="nav-link">Kategoriler</a>
-                </li>
-                <li class="nav-item">
-                    <a asp-controller="Admin" asp-action="CreateCategory" class="nav-link">Kategori Ekle</a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">İletişim</a>
                 </li>
-                @*<li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>*@
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @if (User.IsInRole("admin"))
+                    {
+                        <li class="nav-item">
+                            <a asp-controller="Admin" asp-action="ProductList" class="nav-link">Admin Ürünler</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Admin" asp-action="CreateProduct" class="nav-link">Ürün Ekle</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Admin" asp-action="CategoryList" class="nav-link">Kategoriler</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Admin" asp-action="CreateCategory" class="nav-link">Kategori Ekle</a>
+                        </li>
+                    }
+                }
             </ul>
+        </div>
+        <div class="col-md-3">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Logout</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Register</a>
-                </li>
-
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        @*TODO Kullanıcı için kullanıcı yönetim ekranı eklenecek*@
+                        <a>@User.Identity.Name</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-controller="Account" asp-action="Logout" class="nav-link">Logout</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a asp-controller="Account" asp-action="Login" class="nav-link">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-controller="Account" asp-action="Register" class="nav-link">Register</a>
+                    </li>
+                }
             </ul>
         </div>
     </div>
