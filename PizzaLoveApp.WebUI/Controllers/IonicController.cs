@@ -6,34 +6,44 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PizzaLoveApp.WebUI.Models;
 
 namespace PizzaLoveApp.WebUI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
+
     public class IonicController : ControllerBase
     {
-        IProductService _productService;
+        private IProductService _productService;
+        private ICategoryService _categoryService;
 
-        public IonicController(IProductService productService)
+        public IonicController(IProductService productService,ICategoryService categoryService)
         {
             _productService = productService;
+            _categoryService = categoryService;
         }
 
-        //[HttpGet]
-        //public string Get()
-        //{
-        //    return "merhaba";
-        //}
-
-        [HttpGet("getall")]
-        public List<Product> GetAll()
+        [HttpGet("productlist")]
+        public List<Product> ProductList()
         {
-
             return _productService.GetAll();
 
         }
+
+        [HttpGet("categorylist")]
+        public List<Category> CategoryList()
+        {
+            return _categoryService.GetAll();
+        }
+
+        [HttpGet("products/{category?}")]
+        public List<Product> ProductListWithCategory(string category)
+        {
+            return _productService.GetProductsByCategories(category);
+        }
+
+
     }
 
 

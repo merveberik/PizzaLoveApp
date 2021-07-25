@@ -62,6 +62,10 @@ namespace PizzaLoveApp.WebUI
                 options.SignIn.RequireConfirmedPhoneNumber = false; //Telefondan active etme 
             });
 
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/account/login";
@@ -130,6 +134,7 @@ namespace PizzaLoveApp.WebUI
                     name: "adminProducts",
                     pattern: "admin/products/{id?}",
                     defaults: new { controller = "Admin", action = "EditProduct" });
+
             });
         }
     }
