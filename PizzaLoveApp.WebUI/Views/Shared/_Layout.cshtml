@@ -4,7 +4,9 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link href="/modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/modules/Custom/MyCss.css" rel="stylesheet" />
+    <link href="~/modules/Custom/StyleSheet.css" rel="stylesheet" />
     <link href="~/css/style.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/b6b5d8a538.js" crossorigin="anonymous"></script>
 
@@ -16,10 +18,12 @@
         @RenderBody()
     </div>
 
+    <partial name="_footer" />
 
-    <script src="/modules/jquery/dist/jquery.min.js"></script>
+    
+    <script src="~/modules/jquery/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="/modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
     @RenderSection("Scripts", false)
 </body>

@@ -439,6 +439,11 @@
     <Content Include="node_modules\ckeditor\skins\moono\images\lock.png" />
     <Content Include="node_modules\ckeditor\skins\moono\images\refresh.png" />
     <Content Include="node_modules\ckeditor\skins\moono\images\spinner.gif" />
+    <Content Include="node_modules\Custom\bootstrap.css" />
+    <Content Include="node_modules\Custom\bootstrap.min.css" />
+    <Content Include="node_modules\Custom\font-awesome.css" />
+    <Content Include="node_modules\Custom\MyCss.css" />
+    <Content Include="node_modules\Custom\StyleSheet.css" />
     <Content Include="node_modules\jquery-validation-unobtrusive\LICENSE.txt" />
     <Content Include="node_modules\jquery-validation-unobtrusive\package.json" />
     <Content Include="node_modules\jquery-validation\package.json" />
@@ -2953,6 +2958,9 @@
     <None Include="node_modules\ckeditor\skins\moono\readme.md" />
     <None Include="node_modules\ckeditor\skins\moono\skin.js" />
     <None Include="node_modules\ckeditor\styles.js" />
+    <None Include="node_modules\Custom\bootstrap.js" />
+    <None Include="node_modules\Custom\jquery-3.4.1.slim.js" />
+    <None Include="node_modules\Custom\popper.js" />
     <None Include="node_modules\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.js" />
     <None Include="node_modules\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.min.js" />
     <None Include="node_modules\jquery-validation-unobtrusive\README.md" />
