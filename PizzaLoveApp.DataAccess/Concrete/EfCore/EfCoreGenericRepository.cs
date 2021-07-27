@@ -49,7 +49,7 @@ namespace PizzaLoveApp.DataAccess.Concrete.EfCore
             }
         }
 
-        public void Update(T entity)
+        public virtual void Update(T entity)
         {
             using (var context = new TContext())
             {

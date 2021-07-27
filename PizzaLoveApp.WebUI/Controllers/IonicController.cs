@@ -5,11 +5,15 @@ using PizzaLoveApp.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using PizzaLoveApp.WebUI.Models;
 
 namespace PizzaLoveApp.WebUI.Controllers
 {
+    /*
+     * TODO API'ye login işlemleri eklenecek
+     */
     [Route("api/[controller]")]
     [ApiController]
 
@@ -18,7 +22,7 @@ namespace PizzaLoveApp.WebUI.Controllers
         private IProductService _productService;
         private ICategoryService _categoryService;
 
-        public IonicController(IProductService productService,ICategoryService categoryService)
+        public IonicController(IProductService productService, ICategoryService categoryService)
         {
             _productService = productService;
             _categoryService = categoryService;
@@ -42,6 +46,25 @@ namespace PizzaLoveApp.WebUI.Controllers
         {
             return _productService.GetProductsByCategories(category);
         }
+
+        [HttpGet("details/{id?}")]
+        public IActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            Product product = _productService.GetProductDetails((int)id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return new ObjectResult(product);
+        }
+
 
 
     }
