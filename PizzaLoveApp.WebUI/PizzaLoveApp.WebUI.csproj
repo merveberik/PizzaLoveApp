@@ -443,7 +443,7 @@
     <Content Include="node_modules\Custom\bootstrap.min.css" />
     <Content Include="node_modules\Custom\font-awesome.css" />
     <Content Include="node_modules\Custom\MyCss.css" />
-    <Content Include="node_modules\Custom\StyleSheet.css" />
+    <Content Include="node_modules\Custom\footer.css" />
     <Content Include="node_modules\jquery-validation-unobtrusive\LICENSE.txt" />
     <Content Include="node_modules\jquery-validation-unobtrusive\package.json" />
     <Content Include="node_modules\jquery-validation\package.json" />
