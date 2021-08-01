@@ -13,13 +13,18 @@ namespace PizzaLoveApp.WebUI.Controllers
     [AutoValidateAntiforgeryToken]
     public class AccountController : Controller
     {
+        /*
+         * TODO Cart Service eklenecek
+         */
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
+        private RoleManager<IdentityRole> _roleManager;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
         }
 
         public IActionResult Register()
@@ -45,7 +50,12 @@ namespace PizzaLoveApp.WebUI.Controllers
 
             if (result.Succeeded)
             {
+                // TODO Added generate token
+                // TODO create cart object
+                // TODO Add to create user role
+                
                 return RedirectToAction("account", "login");
+                
             }
 
             ModelState.AddModelError("", "Bilinmeyen hata oluştu lütfen tekrar deneyiniz.");
@@ -106,5 +116,7 @@ namespace PizzaLoveApp.WebUI.Controllers
 
             return Redirect("~/");
         }
+
+        // TODO Access Denied Ekranı eklenecek
     }
 }

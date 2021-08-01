@@ -51,5 +51,10 @@ namespace PizzaLoveApp.WebUI.Controllers
             });
             
         }
+
+        public IActionResult Contact()
+        {
+            return View();
+        }
     }
 }

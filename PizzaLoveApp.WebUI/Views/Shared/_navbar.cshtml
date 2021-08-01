@@ -16,7 +16,7 @@
                     <a class="nav-link" href="#">Kampanyalar</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">İletişim</a>
+                    <a class="nav-link" asp-controller="PizzaLove" asp-action="Contact">İletişim</a>
                 </li>
                 @if (User.Identity.IsAuthenticated)
                 {
@@ -63,3 +63,4 @@
         </div>
     </div>
 </nav>
+

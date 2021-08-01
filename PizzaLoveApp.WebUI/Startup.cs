@@ -29,7 +29,7 @@ namespace PizzaLoveApp.WebUI
             Configuration = configuration;
         }
         
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -84,15 +84,18 @@ namespace PizzaLoveApp.WebUI
 
             services.AddScoped<IProductDal, EfCoreProductDal>();
             services.AddScoped<IProductService, ProductManager>();
-
+            
             services.AddScoped<ICategoryDal, EfCoreCategoryDal>();
             services.AddScoped<ICategoryService, CategoryManager>();
+
+            services.AddScoped<ICartDal, EfCoreCartDal>();
+            services.AddScoped<ICartService, CartManager>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -136,6 +139,8 @@ namespace PizzaLoveApp.WebUI
                     defaults: new { controller = "Admin", action = "EditProduct" });
 
             });
+
+            SeedIdentity.Seed(userManager, roleManager, Configuration).Wait();
         }
     }
 }

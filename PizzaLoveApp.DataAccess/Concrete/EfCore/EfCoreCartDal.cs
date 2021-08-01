@@ -9,7 +9,7 @@ using PizzaLoveApp.Entities;
 
 namespace PizzaLoveApp.DataAccess.Concrete.EfCore
 {
-    class EfCoreCartDal : EfCoreGenericRepository<Cart, PizzaLoveAppContext>, ICartDal
+    public class EfCoreCartDal : EfCoreGenericRepository<Cart, PizzaLoveAppContext>, ICartDal
     {
         public Cart GetByUserId(string userId)
         {
