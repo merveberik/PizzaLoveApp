@@ -13,7 +13,7 @@
                     <a asp-controller="Home" asp-action="Index" class="nav-link active" aria-current="page">Ana Sayfa</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Kampanyalar</a>
+                    <a class="nav-link" href="/products/kampanyalar">Kampanyalar</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" asp-controller="PizzaLove" asp-action="Contact">İletişim</a>
@@ -23,7 +23,7 @@
                     @if (User.IsInRole("admin"))
                     {
                         <li class="nav-item">
-                            <a asp-controller="Admin" asp-action="ProductList" class="nav-link">Admin Ürünler</a>
+                            <a asp-controller="Admin" asp-action="ProductList" class="nav-link">Ürünler</a>
                         </li>
                         <li class="nav-item">
                             <a asp-controller="Admin" asp-action="CreateProduct" class="nav-link">Ürün Ekle</a>
@@ -47,16 +47,16 @@
                         <a>@User.Identity.Name</a>
                     </li>
                     <li class="nav-item">
-                        <a asp-controller="Account" asp-action="Logout" class="nav-link">Logout</a>
+                        <a asp-controller="Account" asp-action="Logout" class="nav-link">Çıkış</a>
                     </li>
                 }
                 else
                 {
                     <li class="nav-item">
-                        <a asp-controller="Account" asp-action="Login" class="nav-link">Login</a>
+                        <a asp-controller="Account" asp-action="Login" class="nav-link">Giriş Yap</a>
                     </li>
                     <li class="nav-item">
-                        <a asp-controller="Account" asp-action="Register" class="nav-link">Register</a>
+                        <a asp-controller="Account" asp-action="Register" class="nav-link">Üye Ol</a>
                     </li>
                 }
             </ul>

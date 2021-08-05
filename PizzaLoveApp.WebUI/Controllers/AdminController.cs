@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using PizzaLoveApp.Business.Abstract;
@@ -48,7 +49,6 @@ namespace PizzaLoveApp.WebUI.Controllers
                 var entity = new Product()
                 {
                     Name = product.Name,
-                    ImageUrl = product.ImageUrl,
                     Price = product.Price,
                     Description = product.Description,
                 };
@@ -100,6 +100,7 @@ namespace PizzaLoveApp.WebUI.Controllers
         public async Task<IActionResult> EditProduct(ProductModel product, int[] categoryIds, IFormFile file)
         {
             var entity = new Product();
+            ModelState.Remove("ImageUrl");
             if (ModelState.IsValid)
             {
                 entity = _productService.GetById(product.Id);

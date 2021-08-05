@@ -10,10 +10,13 @@ namespace PizzaLoveApp.WebUI.Models
     {
         [Required]
         [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email")]
         public string Email { get; set; }
         [Required]
         [DataType(DataType.Password)]
+        [Display(Name = "Şifre")]
         public string Password { get; set; }
+
         public string ReturnUrl { get; set; }
     }
 }

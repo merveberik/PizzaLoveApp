@@ -51,10 +51,17 @@ namespace PizzaLoveApp.WebUI.Controllers
             if (result.Succeeded)
             {
                 // TODO Added generate token
+                //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                //var callbackUrl = Url.Action("ConfirmEmail", "Account", new
+                //{
+                //    userId = user.Id,
+                //    token = code
+                //});
+
                 // TODO create cart object
                 // TODO Add to create user role
                 
-                return RedirectToAction("account", "login");
+                return RedirectToAction("login", "Account");
                 
             }
 
@@ -116,6 +123,8 @@ namespace PizzaLoveApp.WebUI.Controllers
 
             return Redirect("~/");
         }
+
+        // TODO: Şifremi unuttum eklenecek
 
         // TODO Access Denied Ekranı eklenecek
     }
