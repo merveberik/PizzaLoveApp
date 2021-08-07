@@ -70,7 +70,7 @@ namespace PizzaLoveApp.WebUI
             {
                 options.LoginPath = "/account/login";
                 options.LogoutPath = "/account/logout";
-                options.AccessDeniedPath = "/account/accessdenied";
+                options.AccessDeniedPath = "/account/accessdenied"; // eriþim izniniz yok sayfasý
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(60);//cookie süresi(default 20dk)
                 options.SlidingExpiration = true;
                 options.Cookie = new CookieBuilder

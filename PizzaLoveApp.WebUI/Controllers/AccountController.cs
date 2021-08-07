@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PizzaLoveApp.WebUI.EmailServices;
 using PizzaLoveApp.WebUI.Extensions;
 
 namespace PizzaLoveApp.WebUI.Controllers
@@ -59,7 +60,10 @@ namespace PizzaLoveApp.WebUI.Controllers
                 //});
 
                 // TODO create cart object
-                // TODO Add to create user role
+
+
+                // Add to create user role
+                await _userManager.AddToRoleAsync(user, "user");
                 
                 return RedirectToAction("login", "Account");
                 
@@ -88,11 +92,12 @@ namespace PizzaLoveApp.WebUI.Controllers
                 return View(model);
             }
 
-            if (!await _userManager.IsEmailConfirmedAsync(user))
-            {
-                ModelState.AddModelError("", "Lütfen hesabınızı gönderilen email ile aktifleştirniz.");
-                return View(model);
-            }
+            // Email aktivasyonu kullanmıyoruz
+            //if (!await _userManager.IsEmailConfirmedAsync(user))
+            //{
+            //    ModelState.AddModelError("", "Lütfen hesabınızı gönderilen email ile aktifleştirniz.");
+            //    return View(model);
+            //}
 
             var result = await _signInManager.PasswordSignInAsync(user, model.Password, true, false);
 
@@ -124,8 +129,108 @@ namespace PizzaLoveApp.WebUI.Controllers
             return Redirect("~/");
         }
 
-        // TODO: Şifremi unuttum eklenecek
 
-        // TODO Access Denied Ekranı eklenecek
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(string Email)
+        {
+            if (string.IsNullOrEmpty(Email))
+            {
+                TempData.Put("message",new ResultMessage()
+                {
+                    Title = "Şifremi Unuttum",
+                    Message = "Bilgileriniz Hatalı",
+                    Css = "danger"
+                });
+
+                return View();
+            }
+
+            var user = await _userManager.FindByEmailAsync(Email);
+
+            if (user == null)
+            {
+                TempData.Put("messsage", new ResultMessage()
+                {
+                    Title = "Şifremi Unuttum",
+                    Message = "Eposta adresiyle kayıtlı kullanıcı bulunamadı",
+                    Css = "danger"
+                });
+                return View();
+            }
+
+            var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            var callbackUrl = Url.Action("ResetPassword", "Account", new
+            {
+                token = code
+            });
+
+            // send email
+            string siteUri = "https://localhost:44335";
+            string body = $"Şifrenizi yenilemek için link <a href='{siteUri}{callbackUrl}'> tıklayınız. </a>";
+            MailHelper.SendMail(body, Email, "PizzaLove Şifre Sıfırlama.");
+
+            TempData.Put("message",new ResultMessage()
+            {
+                Title = "Şifremi Unuttum",
+                Message = "Şifrenizi yenilemeniz için mail gönderildi. Lütfen mail adresinizi kontrol ediniz.",
+                Css = "warning"
+            });
+            return RedirectToAction("Login", "Account");
+
+        }
+
+        public IActionResult ResetPassword(string token)
+        {
+            if (token == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var model = new ResetPasswordModel {Token = token};
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = await _userManager.FindByEmailAsync(model.Email);
+
+            if (user == null)
+            {
+                TempData.Put("message",new ResultMessage()
+                {
+                    Title = "Şifremi Unuttum",
+                    Message = "Eposta adresiyle kayıtlı kullanıcı bulunamadı.",
+                    Css = "danger"
+                });
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            var result = await _userManager.ResetPasswordAsync(user, model.Token, model.Password);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            return View(model);
+        }
+
+        public IActionResult Accessdenied()
+        {
+            return View();
+        }
     }
 }

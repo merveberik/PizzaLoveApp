@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace PizzaLoveApp.WebUI.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "admin")]
     public class AdminController : Controller
     {
         private IProductService _productService;
@@ -43,6 +43,7 @@ namespace PizzaLoveApp.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateProduct(ProductModel product, int[] categoryIds, IFormFile file)
         {
+            // TODO resim formatı kontrolü 
             ModelState.Remove("ImageUrl");
             if (ModelState.IsValid)
             {
@@ -99,6 +100,8 @@ namespace PizzaLoveApp.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> EditProduct(ProductModel product, int[] categoryIds, IFormFile file)
         {
+            // TODO resim formatı kontrolü
+
             var entity = new Product();
             ModelState.Remove("ImageUrl");
             if (ModelState.IsValid)
