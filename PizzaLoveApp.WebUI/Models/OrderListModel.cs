@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using PizzaLoveApp.Entities;
 
-namespace PizzaLoveApp.Entities
+namespace PizzaLoveApp.WebUI.Models
 {
-    public class Order
+    public class OrderListModel
     {
+
         public int Id { get; set; }
         public string OrderNumber { get; set; }
         public DateTime OrderDate { get; set; }
@@ -22,30 +23,32 @@ namespace PizzaLoveApp.Entities
         public string Email { get; set; }
         public string OrderNote { get; set; }
 
-        // Ödeme API Kullanılacak
-        public string PaymentId { get; set; }
-        public string PaymentToken { get; set; }
-        public string ConversationId { get; set; }
+        /*
+         * liste tutacağız
+         */
 
-        public List<OrderItem> OrderItems { get; set; }
+        public List<OrderItemModel> OrderItems { get; set; }
 
-        public Order()
+        public decimal TotalPrice()
         {
-            OrderItems = new List<OrderItem>();
+            return OrderItems.Sum(i => i.Price * i.Quantity);
         }
 
+        public decimal TotalPrizePoint()
+        {
+            return OrderItems.Sum(i => i.PointPrize * i.Quantity);
+        }
     }
 
-    public enum EnumPaymentTypes
+    public class OrderItemModel
     {
-        CreditCart = 0,
-        Eft = 1
+        public int OrderItemId { get; set; }
+        public string ImageUrl { get; set; }
+        public string Name { get; set; }
+
+        public decimal Price { get; set; }
+        public int Quantity { get; set; }
+        public decimal PointPrize { get; set; }
     }
 
-    public enum EnumOrderState
-    {
-        Waiting = 0,
-        Unpaid = 1,
-        Completed = 2
-    }
 }

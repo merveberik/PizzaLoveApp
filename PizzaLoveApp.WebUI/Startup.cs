@@ -28,7 +28,7 @@ namespace PizzaLoveApp.WebUI
         {
             Configuration = configuration;
         }
-        
+
         public IConfiguration Configuration { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -44,11 +44,11 @@ namespace PizzaLoveApp.WebUI
 
             services.Configure<IdentityOptions>(options =>
             {
-                options.Password.RequireDigit = true;
-                options.Password.RequireLowercase = true; 
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
                 options.Password.RequiredLength = 6;
-                options.Password.RequireNonAlphanumeric = true;
-                options.Password.RequireUppercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
 
                 options.Lockout.MaxFailedAccessAttempts = 5; //Max 5 defa yanlýþ giriþ hakký
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5); //5 kereden sonra 5 dakika giriþ yasak
@@ -58,7 +58,7 @@ namespace PizzaLoveApp.WebUI
                 //options.User.AllowedUserNameCharacters = ""; //Username de ý kullanma
                 options.User.RequireUniqueEmail = true; //Ayný Email Adresi ile Kayýt Engelle
 
-                options.SignIn.RequireConfirmedEmail = false; //Mail ile aktive etme açýk
+                options.SignIn.RequireConfirmedEmail = true; //Mail ile aktive etme açýk
                 options.SignIn.RequireConfirmedPhoneNumber = false; //Telefondan active etme 
             });
 
@@ -77,19 +77,22 @@ namespace PizzaLoveApp.WebUI
                 {
                     HttpOnly = true,
                     Name = ".PizzaLoveApp.Security.Cookie",
-                    SameSite=SameSiteMode.Strict
+                    SameSite = SameSiteMode.Strict
                 };
 
             });
 
             services.AddScoped<IProductDal, EfCoreProductDal>();
             services.AddScoped<IProductService, ProductManager>();
-            
+
             services.AddScoped<ICategoryDal, EfCoreCategoryDal>();
             services.AddScoped<ICategoryService, CategoryManager>();
 
             services.AddScoped<ICartDal, EfCoreCartDal>();
             services.AddScoped<ICartService, CartManager>();
+
+            services.AddScoped<IOrderDal, EfCoreOrderDal>();
+            services.AddScoped<IOrderService, OrderManager>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
         }
@@ -108,7 +111,7 @@ namespace PizzaLoveApp.WebUI
             }
 
             app.UseHttpsRedirection();
-            
+
             app.UseStaticFiles();
 
             app.CustomStaticFiles();
@@ -118,7 +121,7 @@ namespace PizzaLoveApp.WebUI
             app.UseRouting();
 
             app.UseAuthorization();
-            
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}");
@@ -137,6 +140,11 @@ namespace PizzaLoveApp.WebUI
                     name: "adminProducts",
                     pattern: "admin/products/{id?}",
                     defaults: new { controller = "Admin", action = "EditProduct" });
+
+                endpoints.MapControllerRoute(
+                    name: "cart",
+                    pattern: "cart",
+                    defaults: new { controller = "Cart", action = "Index" });
 
             });
 

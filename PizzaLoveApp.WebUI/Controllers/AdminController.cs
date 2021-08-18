@@ -51,6 +51,7 @@ namespace PizzaLoveApp.WebUI.Controllers
                 {
                     Name = product.Name,
                     Price = product.Price,
+                    PointPrize = product.PointPrize,
                     Description = product.Description,
                 };
                 if (file != null)
@@ -88,6 +89,7 @@ namespace PizzaLoveApp.WebUI.Controllers
                 Id = entity.Id,
                 Name = entity.Name,
                 Price = entity.Price,
+                PointPrize = entity.PointPrize,
                 Description = entity.Description,
                 ImageUrl = entity.ImageUrl,
                 SelectedCategories = entity.ProductCategories.Select(i => i.Category).ToList()
@@ -113,6 +115,7 @@ namespace PizzaLoveApp.WebUI.Controllers
                 }
                 entity.Name = product.Name;
                 entity.Description = product.Description;
+                entity.PointPrize = product.PointPrize;
                 entity.Price = product.Price;
 
                 if (file != null)

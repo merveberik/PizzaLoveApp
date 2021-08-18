@@ -72,6 +72,13 @@
                 </div>
             </div>
             <div class="form-group-row">
+                <label asp-for="PointPrize" class="col-md-4 col-form-label">PizzaLove Puan</label>
+                <div class="col-md-10">
+                    <input asp-for="PointPrize" value="@Model.PointPrize" class="form-control" />
+                    <span asp-validation-for="PointPrize" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group-row">
                 <label asp-for="Size" class="col-md-2 col-form-label">Boyutu</label>
                 <div class="col-md-10">
                     <input asp-for="Size" value="@Model.Size" class="form-control" />

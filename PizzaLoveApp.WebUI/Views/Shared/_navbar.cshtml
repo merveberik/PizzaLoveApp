@@ -44,7 +44,7 @@
                 {
                     <li class="nav-item">
                         @*TODO Kullanıcı için kullanıcı yönetim ekranı eklenecek*@
-                        <a>@User.Identity.Name</a>
+                        <a asp-controller="Account" asp-action="UserManager" class="nav-link">@User.Identity.Name</a>
                     </li>
                     <li class="nav-item">
                         <a asp-controller="Account" asp-action="Logout" class="nav-link">Çıkış</a>

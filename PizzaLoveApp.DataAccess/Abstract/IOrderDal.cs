@@ -9,5 +9,7 @@ namespace PizzaLoveApp.DataAccess.Abstract
 {
     public interface IOrderDal : IRepository<Order>
     {
+        List<Order> GetOrders(string userId);
+        List<Order> GetOrders();
     }
 }

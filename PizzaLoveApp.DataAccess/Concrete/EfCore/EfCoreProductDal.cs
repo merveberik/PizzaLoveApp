@@ -66,6 +66,7 @@ namespace PizzaLoveApp.DataAccess.Concrete.EfCore
                     product.Price = entity.Price;
                     product.ImageUrl = entity.ImageUrl;
                     product.Description = entity.Description;
+                    product.PointPrize = entity.PointPrize;
                     product.ProductCategories = categoryIds.Select(catId => new ProductCategory()
                     {
                         CategoryId = catId,
@@ -89,6 +90,7 @@ namespace PizzaLoveApp.DataAccess.Concrete.EfCore
                     product.Price = entity.Price;
                     product.ImageUrl = entity.ImageUrl;
                     product.Description = entity.Description;
+                    product.PointPrize = entity.PointPrize;
                     product.ProductCategories = categoryIds.Select(catId => new ProductCategory()
                     {
                         CategoryId = catId,

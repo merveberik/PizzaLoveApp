@@ -9,9 +9,13 @@ namespace PizzaLoveApp.Business.Abstract
 {
     public interface IOrderService
     {
-        List<Order> GetAll();
+        //List<Order> GetAll();
+        //void Create(Order entity);
+        //void Update(Order entity);
+        //void Delete(Order entity);
+
         void Create(Order entity);
-        void Update(Order entity);
-        void Delete(Order entity);
+        List<Order> GetOrders(string userId);
+        List<Order> GetOrders();
     }
 }

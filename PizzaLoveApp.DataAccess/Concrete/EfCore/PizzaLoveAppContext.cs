@@ -27,6 +27,7 @@ namespace PizzaLoveApp.DataAccess.Concrete.EfCore
         public DbSet<Category> Categories{ get; set; }
         public DbSet<Order> Orders{ get; set; }
         public DbSet<Cart> Carts { get; set; }
+        public DbSet<Prize> Prizes { get; set; }
 
     }
 }

@@ -18,24 +18,20 @@ namespace PizzaLoveApp.Business.Concrete
             _orderDal = orderDal;
         }
 
+
         public void Create(Order entity)
         {
             _orderDal.Create(entity);
         }
 
-        public void Delete(Order entity)
+        public List<Order> GetOrders(string userId)
         {
-            _orderDal.Delete(entity);
+            return _orderDal.GetOrders(userId);
         }
 
-        public List<Order> GetAll()
+        public List<Order> GetOrders()
         {
-            return _orderDal.GetAll();
-        }
-
-        public void Update(Order entity)
-        {
-            _orderDal.Update(entity);
+            return _orderDal.GetOrders();
         }
     }
 }
