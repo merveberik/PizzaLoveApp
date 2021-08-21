@@ -20,6 +20,7 @@ namespace PizzaLoveApp.Entities
         public decimal PointPrize { get; set; }
 
         public List<ProductCategory> ProductCategories { get; set; }
+        public List<ProductSize> ProductSizes { get; set; }
 
     }
 }

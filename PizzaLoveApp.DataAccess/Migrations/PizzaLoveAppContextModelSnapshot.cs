@@ -223,6 +223,36 @@ namespace PizzaLoveApp.DataAccess.Migrations
                     b.ToTable("ProductCategory");
                 });
 
+            modelBuilder.Entity("PizzaLoveApp.Entities.ProductSize", b =>
+                {
+                    b.Property<int>("SizeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SizeId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductSize");
+                });
+
+            modelBuilder.Entity("PizzaLoveApp.Entities.Size", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sizes");
+                });
+
             modelBuilder.Entity("PizzaLoveApp.Entities.CartItem", b =>
                 {
                     b.HasOne("PizzaLoveApp.Entities.Cart", "Cart")
@@ -280,6 +310,25 @@ namespace PizzaLoveApp.DataAccess.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("PizzaLoveApp.Entities.ProductSize", b =>
+                {
+                    b.HasOne("PizzaLoveApp.Entities.Product", "Product")
+                        .WithMany("ProductSizes")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PizzaLoveApp.Entities.Size", "Size")
+                        .WithMany("ProductSizes")
+                        .HasForeignKey("SizeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Size");
+                });
+
             modelBuilder.Entity("PizzaLoveApp.Entities.Cart", b =>
                 {
                     b.Navigation("CartItems");
@@ -298,6 +347,13 @@ namespace PizzaLoveApp.DataAccess.Migrations
             modelBuilder.Entity("PizzaLoveApp.Entities.Product", b =>
                 {
                     b.Navigation("ProductCategories");
+
+                    b.Navigation("ProductSizes");
+                });
+
+            modelBuilder.Entity("PizzaLoveApp.Entities.Size", b =>
+                {
+                    b.Navigation("ProductSizes");
                 });
 #pragma warning restore 612, 618
         }

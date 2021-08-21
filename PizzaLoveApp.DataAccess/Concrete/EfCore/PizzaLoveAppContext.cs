@@ -21,6 +21,9 @@ namespace PizzaLoveApp.DataAccess.Concrete.EfCore
         {
             modelbuilder.Entity<ProductCategory>()
                 .HasKey(c => new { c.CategoryId, c.ProductId});
+
+            modelbuilder.Entity<ProductSize>()
+                .HasKey(c => new {c.SizeId, c.ProductId});
         }
 
         public DbSet<Product> Products { get; set; }
@@ -28,6 +31,7 @@ namespace PizzaLoveApp.DataAccess.Concrete.EfCore
         public DbSet<Order> Orders{ get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<Prize> Prizes { get; set; }
+        public DbSet<Size> Sizes { get; set; }
 
     }
 }

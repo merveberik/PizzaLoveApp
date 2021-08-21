@@ -25,10 +25,11 @@ namespace PizzaLoveApp.WebUI.Models
         [DisplayName("Fiyat")]
         public decimal? Price { get; set; }
         [DisplayName("Boyutu")]
-        public int Size { get; set; }
+        public string Size { get; set; }
         [DisplayName("Ürün Puanı")]
         public decimal PointPrize { get; set; }
 
         public List<Category> SelectedCategories = new List<Category>();
+        public List<Size> SelectedSize = new List<Size>();
     }
 }

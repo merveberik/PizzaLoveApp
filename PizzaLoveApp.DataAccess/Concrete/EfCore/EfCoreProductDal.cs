@@ -52,6 +52,18 @@ namespace PizzaLoveApp.DataAccess.Concrete.EfCore
             }
         }
 
+        public Product GetByIdWithSize(int id)
+        {
+            using (var context = new PizzaLoveAppContext())
+            {
+                return context.Products
+                    .Where(i => i.Id == id)
+                    .Include(i => i.ProductSizes)
+                    .ThenInclude(i => i.Size)
+                    .FirstOrDefault();
+            }
+        }
+
         public void Update(Product entity, int[] categoryIds)
         {
             using (var context = new PizzaLoveAppContext())
@@ -98,6 +110,69 @@ namespace PizzaLoveApp.DataAccess.Concrete.EfCore
                     }).ToList();
 
                     context.Products.Add(product);
+                    context.SaveChanges();
+                }
+
+            }
+        }
+
+        public void Create(Product entity, int[] categoryIds, int[] sizeIds)
+        {
+            using (var context = new PizzaLoveAppContext())
+            {
+                if (entity != null)
+                {
+                    Product product = new Product();
+                    product.Name = entity.Name;
+                    product.Price = entity.Price;
+                    product.ImageUrl = entity.ImageUrl;
+                    product.Description = entity.Description;
+                    product.PointPrize = entity.PointPrize;
+                    product.ProductCategories = categoryIds.Select(catId => new ProductCategory()
+                    {
+                        CategoryId = catId,
+                        ProductId = product.Id
+                    }).ToList();
+                    product.ProductSizes = sizeIds.Select(catId => new ProductSize()
+                    {
+                        SizeId = catId,
+                        ProductId = product.Id
+                    }).ToList();
+
+                    context.Products.Add(product);
+                    context.SaveChanges();
+                }
+
+            }
+        }
+
+        public void Update(Product entity, int[] categoryIds, int[] sizeIds)
+        {
+            using (var context = new PizzaLoveAppContext())
+            {
+                var product = context.Products
+                    .Include(i => i.ProductCategories)
+                    .Include(s =>s.ProductSizes)
+                    .FirstOrDefault(i => i.Id == entity.Id);
+
+                if (product != null)
+                {
+                    product.Name = entity.Name;
+                    product.Price = entity.Price;
+                    product.ImageUrl = entity.ImageUrl;
+                    product.Description = entity.Description;
+                    product.PointPrize = entity.PointPrize;
+                    product.ProductCategories = categoryIds.Select(catId => new ProductCategory()
+                    {
+                        CategoryId = catId,
+                        ProductId = product.Id
+                    }).ToList();
+                    product.ProductSizes = sizeIds.Select(sizId => new ProductSize()
+                    {
+                        SizeId = sizId,
+                        ProductId = product.Id
+                    }).ToList();
+
                     context.SaveChanges();
                 }
 

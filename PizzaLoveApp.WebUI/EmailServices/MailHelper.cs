@@ -40,7 +40,7 @@ namespace PizzaLoveApp.WebUI.EmailServices
                 using (var smtp = new SmtpClient("smtp.gmail.com", 587))
                 {
                     smtp.EnableSsl = true;
-                    smtp.Credentials = new NetworkCredential("test.emredemir@gmail.com", "BhsY8x8D486kE57");
+                    smtp.Credentials = new NetworkCredential("test.emredemir@gmail.com", "y5pHGu3-X-vcFxW");
                     smtp.Send(message);
                     result = true;
                 }

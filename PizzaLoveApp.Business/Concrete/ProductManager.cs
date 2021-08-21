@@ -33,6 +33,11 @@ namespace PizzaLoveApp.Business.Concrete
             return _productDal.GetByIdWithCategories(id);
         }
 
+        public Product GetByIdWithSize(int id)
+        {
+            return _productDal.GetByIdWithSize(id);
+        }
+
         public void Update(Product entity, int[] categoryIds)
         {
             _productDal.Update(entity,categoryIds);
@@ -66,6 +71,16 @@ namespace PizzaLoveApp.Business.Concrete
         public void Create(Product entity, int[] categoryIds)
         {
             _productDal.Create(entity, categoryIds);
+        }
+
+        public void Create(Product entity, int[] categoryIds, int[] sizeIds)
+        {
+            _productDal.Create(entity,categoryIds,sizeIds);
+        }
+
+        public void Update(Product entity, int[] categoryIds, int[] sizeIds)
+        {
+            _productDal.Update(entity,categoryIds,sizeIds);
         }
     }
 }

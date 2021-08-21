@@ -18,11 +18,13 @@ namespace PizzaLoveApp.WebUI.Controllers
     {
         private IProductService _productService;
         private ICategoryService _categoryService;
+        private ISizeService _sizeService;
 
-        public AdminController(IProductService productService, ICategoryService categoryService)
+        public AdminController(IProductService productService, ICategoryService categoryService, ISizeService sizeService)
         {
             _productService = productService;
             _categoryService = categoryService;
+            _sizeService = sizeService;
         }
 
         public IActionResult ProductList()
@@ -37,11 +39,12 @@ namespace PizzaLoveApp.WebUI.Controllers
         public IActionResult CreateProduct()
         {
             ViewBag.Categories = _categoryService.GetAll();
+            ViewBag.Size = _sizeService.GetAll();
             return View(new ProductModel());
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateProduct(ProductModel product, int[] categoryIds, IFormFile file)
+        public async Task<IActionResult> CreateProduct(ProductModel product, int[] categoryIds,int[] sizeIds, IFormFile file)
         {
             // TODO resim formatı kontrolü 
             ModelState.Remove("ImageUrl");
@@ -64,7 +67,7 @@ namespace PizzaLoveApp.WebUI.Controllers
                         await file.CopyToAsync(stream);
                     }
                 }
-                _productService.Create(entity, categoryIds);
+                _productService.Create(entity, categoryIds,sizeIds);
                 return RedirectToAction("ProductList");
             }
 
@@ -79,8 +82,14 @@ namespace PizzaLoveApp.WebUI.Controllers
                 return NotFound();
             }
             var entity = _productService.GetByIdWithCategories((int)id);
+            var entitySize = _productService.GetByIdWithSize((int) id);
 
             if (entity == null)
+            {
+                return NotFound();
+            }
+
+            if (entitySize == null)
             {
                 return NotFound();
             }
@@ -92,17 +101,19 @@ namespace PizzaLoveApp.WebUI.Controllers
                 PointPrize = entity.PointPrize,
                 Description = entity.Description,
                 ImageUrl = entity.ImageUrl,
-                SelectedCategories = entity.ProductCategories.Select(i => i.Category).ToList()
+                SelectedCategories = entity.ProductCategories.Select(i => i.Category).ToList(),
+                SelectedSize = entitySize.ProductSizes.Select(i => i.Size).ToList()
             };
 
             ViewBag.Categories = _categoryService.GetAll();
+            ViewBag.Size = _sizeService.GetAll();
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditProduct(ProductModel product, int[] categoryIds, IFormFile file)
+        public async Task<IActionResult> EditProduct(ProductModel product, int[] categoryIds, int[] sizeIds, IFormFile file)
         {
-            // TODO resim formatı kontrolü
+            // TODO resim formatı kontrolü şuan ger dosya sunucuya yüklenebilir
 
             var entity = new Product();
             ModelState.Remove("ImageUrl");
@@ -129,7 +140,7 @@ namespace PizzaLoveApp.WebUI.Controllers
                     }
                 }
 
-                _productService.Update(entity, categoryIds);
+                _productService.Update(entity, categoryIds,sizeIds);
 
                 return RedirectToAction("ProductList");
             }

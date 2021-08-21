@@ -24,6 +24,8 @@ namespace PizzaLoveApp.DataAccess.Concrete.EfCore
                 {
                     context.Products.AddRange(Products);
                     context.AddRange(ProductCategory);
+                    context.AddRange(sizes);
+                    context.AddRange(productSizes);
                 }
                 context.SaveChanges();
             }
@@ -102,10 +104,31 @@ namespace PizzaLoveApp.DataAccess.Concrete.EfCore
             new ProductCategory(){Product=Products[24],Category=Categories[11]},
         };
 
-        //private static SpecialPizza[] SpecialPizzas =
-        //{
-        //    new SpecialPizza(){Name="Tonbalıklı pizza",Price=30,ImageUrl="13.jpg",Description="Akdenizden çıkartılan özenle hazırlanmış tonbalıkları ile süslenmiş pizza"},
-        //    new SpecialPizza(){Name="Kapya biberli pizza",Price=22,ImageUrl="14.jpg",Description="Mevsime özel kırmızı ve yeşil kapya biberli pizza"}
-        //};
+        private static Size[] sizes=
+        {
+            new Size(){Name = "Küçük"},
+            new Size(){Name = "Orta"},
+            new Size(){Name = "Büyük"},
+            new Size(){Name = "Mega"}
+        };
+
+        private static ProductSize[] productSizes =
+        {
+            new ProductSize() {Product = Products[0], Size = sizes[0]},
+            new ProductSize() {Product = Products[0], Size = sizes[1]},
+            new ProductSize() {Product = Products[0], Size = sizes[2]},
+            new ProductSize() {Product = Products[1], Size = sizes[0]},
+            new ProductSize() {Product = Products[1], Size = sizes[1]},
+            new ProductSize() {Product = Products[1], Size = sizes[2]},
+            new ProductSize() {Product = Products[2], Size = sizes[0]},
+            new ProductSize() {Product = Products[2], Size = sizes[1]},
+            new ProductSize() {Product = Products[2], Size = sizes[2]},
+            new ProductSize() {Product = Products[3], Size = sizes[0]},
+            new ProductSize() {Product = Products[3], Size = sizes[1]},
+            new ProductSize() {Product = Products[3], Size = sizes[2]},
+            new ProductSize() {Product = Products[4], Size = sizes[0]},
+            new ProductSize() {Product = Products[4], Size = sizes[1]},
+            new ProductSize() {Product = Products[4], Size = sizes[2]}
+        };
     }
 }

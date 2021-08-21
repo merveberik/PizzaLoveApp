@@ -94,6 +94,9 @@ namespace PizzaLoveApp.WebUI
             services.AddScoped<IOrderDal, EfCoreOrderDal>();
             services.AddScoped<IOrderService, OrderManager>();
 
+            services.AddScoped<ISizeDal, EfSizeDal>();
+            services.AddScoped<ISizeService, SizeManager>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
         }
 
